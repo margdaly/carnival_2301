@@ -39,7 +39,7 @@ RSpec.describe Ride do
   end
 
   describe '#board_rider' do
-    xit 'logs who has ridden and how many times' do
+    it 'logs who has ridden and how many times' do
       @visitor1.add_preference(:gentle)
       @visitor2.add_preference(:gentle)
       @ride1.board_rider(@visitor1)
@@ -49,7 +49,7 @@ RSpec.describe Ride do
       expect(@ride1.ride_log).to eq({@visitor1=>2, @visitor2=>1})
     end
 
-    xit 'reduces spending_money of visitor ' do
+    it 'reduces spending_money of visitor ' do
       @visitor1.add_preference(:gentle)
       @visitor2.add_preference(:gentle)
       @ride1.board_rider(@visitor1)
@@ -60,7 +60,7 @@ RSpec.describe Ride do
       expect(@visitor2.spending_money).to eq(4)
     end
 
-    xit 'increases rides revenue' do
+    it 'increases rides revenue' do
       expect(@ride1.total_revenue).to eq(0)
 
       @visitor1.add_preference(:gentle)
