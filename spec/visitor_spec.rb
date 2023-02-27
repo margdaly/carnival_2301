@@ -42,4 +42,16 @@ RSpec.describe Visitor do
       expect(visitor3.preferences).to eq([:gentle, :water])
     end
   end
+
+  describe '#tall_enough?' do
+    it 'returns true if equal or over to 40' do
+      visitor1 = Visitor.new('Bruce', 54, '$10')
+      visitor2 = Visitor.new('Tucker', 36, '$5')
+      visitor3 = Visitor.new('Penny', 64, '$15')
+
+      expect(visitor1.tall_enough?).to eq(true)
+      expect(visitor2.tall_enough?).to eq(false)
+      expect(visitor3.tall_enough?).to eq(true)
+    end
+  end
 end
