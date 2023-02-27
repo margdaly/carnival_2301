@@ -10,4 +10,8 @@ class Visitor
      @spending_money = spending_money
      @preferences = []
   end
+
+  def add_preference(info)
+    @preferences << info
+  end
 end
