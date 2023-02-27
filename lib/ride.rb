@@ -18,17 +18,16 @@ class Ride
   def board_rider(visitor)
     @check_visitor
     @total_revenue += @admission_fee
-    visitor.spending_money = visitor.spending_money.delete_prefix('$').to_i
-    visitor.spending_money = visitor.spending_money - @admission_fee
-    # count = 0
-    # if @ride_log.has_key?(visitor)
-    #   @ride_log.merge(@ride_log[visitor] = count += 1)
-    # else 
-    #   @ride_log[visitor] = count += 1
-    # end
+    new_visitor = Visitor.new(visitor.name, visitor.height, visitor.spending_money.delete_prefix!('$').to_i)
+    new_visitor.spending_money - @admission_fee
+    if @ride_log.has_key?(new_visitor)
+      @ride_log[new_visitor] += 1
+    else 
+      @ride_log[new_visitor] = 1
+    end
   end
 
   def check_visitor(visitor)
-    visitor.preferences.include?(@excitement) && visitor.spending_money.delete_prefix('$').to_i >= @admission_fee && visitor.height >= @min_height
+    visitor.preferences.include?(@excitement) && visitor.spending_money.delete_prefix('$').to_i >= @admission_fee && visitor.tall_enough?(@min_height)
   end
 end
