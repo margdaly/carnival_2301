@@ -28,8 +28,48 @@ RSpec.describe Ride do
     end
   end
 
-  describe '#rider_log' do
-    it '' do
+  describe '#check_visitor' do
+    it 'checks if visitor tall_enough, enough money, and checks excitment' do
+      @visitor1.add_preference(:gentle)
+      @visitor2.add_preference(:gentle)
+
+      expect(@ride1.check_visitor(@visitor1)).to eq(true)
+      expect(@ride3.check_visitor(@visitor2)).to eq(false)
+    end
+  end
+
+  describe '#board_rider' do
+    xit 'logs who has ridden and how many times' do
+      @visitor1.add_preference(:gentle)
+      @visitor2.add_preference(:gentle)
+      @ride1.board_rider(@visitor1)
+      @ride1.board_rider(@visitor2)
+      @ride1.board_rider(@visitor1)
+
+      expect(@ride1.ride_log).to eq({@visitor1=>2, @visitor2=>1})
+    end
+
+    xit 'reduces spending_money of visitor ' do
+      @visitor1.add_preference(:gentle)
+      @visitor2.add_preference(:gentle)
+      @ride1.board_rider(@visitor1)
+      @ride1.board_rider(@visitor2)
+      @ride1.board_rider(@visitor1)
+
+      expect(@visitor1.spending_money).to eq(8)
+      expect(@visitor2.spending_money).to eq(4)
+    end
+
+    xit 'increases rides revenue' do
+      expect(@ride1.total_revenue).to eq(0)
+
+      @visitor1.add_preference(:gentle)
+      @visitor2.add_preference(:gentle)
+      @ride1.board_rider(@visitor1)
+      @ride1.board_rider(@visitor2)
+      @ride1.board_rider(@visitor1)
+
+      expect(@ride1.total_revenue).to eq(3)
     end
   end
 end
